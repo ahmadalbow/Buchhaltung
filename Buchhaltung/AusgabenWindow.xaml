@@ -1,0 +1,76 @@
+﻿<Window x:Class="Buchhaltung.AusgabenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Buchhaltung" xmlns:viewmodell="clr-namespace:Buchhaltung.MVVM.ViewModell"
+        mc:Ignorable="d"
+        Title="AusgabenWindow" Height="170" Width="650"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <viewmodell:AusgabenViewModell/>
+    </Window.DataContext>
+    <Border Background="#EFF3F2" 
+            CornerRadius="7" BorderThickness="1" 
+            BorderBrush="#999"
+            MouseDown="Drag">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+                
+            </Grid.RowDefinitions>
+            <Label Content="Ausgaben" 
+                   HorizontalAlignment="Center"
+                   FontSize="18"
+                   FontWeight="SemiBold"/>
+            <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Style="{StaticResource CloseButtonTheme}"
+                        Content="🞪"
+                        Margin="10" Click="Button_Click"/>
+            </Grid>
+            <StackPanel Height="80" 
+                        Grid.Row="1" 
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Background="Transparent">
+                <ComboBox Margin="20 0 0  0 "
+                          Width="120" Height="35"
+                          VerticalAlignment="Center" 
+                          Style="{StaticResource ComboBoxFlatStyle}"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay }">
+                    <ComboBoxItem Tag="1" Content="Miete" IsSelected="True"/>
+                    <ComboBoxItem Tag="2" Content="Rechnung"/>
+                    <ComboBoxItem Tag="3" Content="Lohn"/>
+                </ComboBox>
+
+                <TextBox Style="{StaticResource TextBoxTheme}" 
+                         Text ="{Binding Date,NotifyOnSourceUpdated=True,Mode=TwoWay}"
+                        
+                         Width="120" 
+                         Height="35"
+                         x:Name="Date">
+                </TextBox>
+                <TextBox Style="{StaticResource TextBoxTheme}" 
+                         Text="{Binding Betrag, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         Width="120"
+                         Height="35" 
+                         x:Name="Betrag">
+                </TextBox>
+                <Button  Background="#003Cb5"
+                    Style="{StaticResource ButtonTheme}"
+                    Content="Add"   
+                     Height="35" 
+                    Command="{Binding AddAusgabe}"
+                    />
+  
+
+            </StackPanel>
+
+        </Grid>
+       
+    </Border>
+</Window>

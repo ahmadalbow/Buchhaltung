@@ -1,0 +1,20 @@
+﻿<Application x:Class="Buchhaltung.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Buchhaltung"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ButtonTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/CloseButtonTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/ReservationCard.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/AusgabeCard.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/Scrollbar.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/TextBoxTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/ComboBoxTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Themes/CheckBox.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
