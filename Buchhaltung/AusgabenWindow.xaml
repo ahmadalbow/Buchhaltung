@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Buchhaltung" xmlns:viewmodell="clr-namespace:Buchhaltung.MVVM.ViewModell"
         mc:Ignorable="d"
-        Title="AusgabenWindow" Height="170" Width="650"
+        Title="AusgabenWindow" Height="170" Width="700"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True">
@@ -43,7 +43,9 @@
                           Style="{StaticResource ComboBoxFlatStyle}"
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay }">
                     <ComboBoxItem Tag="1" Content="Miete" IsSelected="True"/>
-                    <ComboBoxItem Tag="2" Content="Rechnung"/>
+                    <ComboBoxItem Tag="2" Content="Rechnung 19%"/>
+                    <ComboBoxItem Tag="2" Content="Rechnung 7%"/>
+
                     <ComboBoxItem Tag="3" Content="Lohn"/>
                 </ComboBox>
 
@@ -59,6 +61,12 @@
                          Width="120"
                          Height="35" 
                          x:Name="Betrag">
+                </TextBox>
+                <TextBox Style="{StaticResource TextBoxTheme}" 
+                         Text="{Binding Details, NotifyOnSourceUpdated=True, Mode=TwoWay}"
+                         Width="120"
+                         Height="35" 
+                         x:Name="Details">
                 </TextBox>
                 <Button  Background="#003Cb5"
                     Style="{StaticResource ButtonTheme}"

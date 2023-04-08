@@ -9,7 +9,8 @@
                         <Border VerticalAlignment="Center" Height="35" Background="White" CornerRadius="5" Margin="0 5 0 0" >
                             <Grid  VerticalAlignment="Center"  >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="160"/>
+                                    <ColumnDefinition Width="130"/>
                                     <ColumnDefinition Width="130"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="40"/>
@@ -17,8 +18,9 @@
                                 <Label Grid.Column="0" Margin="20 0 10 0" Content="{Binding Number}" FontSize="16" FontWeight="Medium"></Label>
                                 <Label Grid.Column="1" Margin="20 0 10 0" Content="{Binding Date}" FontSize="16" FontWeight="Medium"/>
                                 <Label Grid.Column="2"  Margin="20 0 10 0" Content="{Binding Betrag}" FontSize="16" FontWeight="Medium"/>
+                                <Label Grid.Column="3"  Margin="20 0 10 0" Content="{Binding details}" FontSize="16" FontWeight="Medium"/>
                                 <Button Command="{Binding RemoveAusgabe}"
-                                        Margin="10" Grid.Column="3">
+                                        Margin="10" Grid.Column="4">
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button}">
                                             <Style.Setters>

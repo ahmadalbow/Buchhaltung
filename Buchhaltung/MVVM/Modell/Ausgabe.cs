@@ -32,11 +32,13 @@ namespace Buchhaltung.MVVM.Modell
         {
             get
             {
-                if (art == "Rechnung") return Betrag * 19 / 119;
+                if (art == "Rechnung 19%") return Betrag * 19 / 119;
+                if (art == "Rechnung 7%") return Betrag * 7 / 107;
                 return 0;
             }
         }
         public string art { get; set; }
+        public string details { get; set; }
        
         public DateTime Date { get; set; }
         public double Betrag { get; set; }
@@ -52,6 +54,7 @@ namespace Buchhaltung.MVVM.Modell
                     ausgabe.Number = (1 + MainViewModell.Ausgaben.IndexOf(ausgabe)) + "    " + art;
                 }
             });
+            details = "Ikea";
         }
 
     }

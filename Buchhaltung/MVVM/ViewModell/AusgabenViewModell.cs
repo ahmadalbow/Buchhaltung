@@ -42,6 +42,17 @@ namespace Buchhaltung.MVVM.ViewModell
                 OnPropertyChanged();
             }
         }
+        private string  _details;
+
+        public string  Details
+        {
+            get { return _details; }
+            set 
+            { 
+                _details = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand AddAusgabe { get; set; }
         public AusgabenViewModell()
@@ -54,7 +65,9 @@ namespace Buchhaltung.MVVM.ViewModell
                     {
                         art = SelectedItem.Split(": ")[1],
                         Betrag = double.Parse(Betrag),
-                        Date = DateTime.ParseExact(Date, "dd.MM.yyyy", null)
+                        Date = DateTime.ParseExact(Date, "dd.MM.yyyy", null),
+                        details = Details
+
                     };
                     MainViewModell.Ausgaben.Add(ausgabe);
                     Betrag = "";

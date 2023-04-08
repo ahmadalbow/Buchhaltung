@@ -73,7 +73,9 @@ namespace Buchhaltung.MVVM.Modell
                 {
                     try
                     {
-                        int.Parse(ln[0].ToString() );
+                        ln = ln.Replace("\"", "");
+                        
+                        float.Parse(ln[0].ToString() );
                         lines.Add(ln);
                         count++;
                     }
@@ -86,27 +88,27 @@ namespace Buchhaltung.MVVM.Modell
                 for(int n = 0; n < lines.Count; n++)
                 {
                     string curLine = lines[n];
-                    for (int i = 0; i < curLine.Length; i++)
-                    {
-                        char c = curLine[i];
-                        if (c == '\"')
-                        {
-                            string textToBeRemoved = "";
-                            for (int j = i; j < curLine.Length; j++)
-                            {
-                                char cc = curLine[j];
-                                textToBeRemoved = textToBeRemoved + cc;
-                                if (cc == '\"' & j != i)
-                                {
-                                    curLine = curLine.Replace(textToBeRemoved, "");
-                                    break;
-                                }
+                    //for (int i = 0; i < curLine.Length; i++)
+                    //{
+                    //    char c = curLine[i];
+                    //    if (c == '\"')
+                    //    {
+                    //        string textToBeRemoved = "";
+                    //        for (int j = i; j < curLine.Length; j++)
+                    //        {
+                    //            char cc = curLine[j];
+                    //            textToBeRemoved = textToBeRemoved + cc;
+                    //            if (cc == '\"' & j != i)
+                    //            {
+                    //                curLine = curLine.Replace(textToBeRemoved, "");
+                    //                break;
+                    //            }
 
-                            }
-                            break;
-                        }
-                    }
-                    string[] linecontent = curLine.Replace("\"", "").Split(',');
+                    //        }
+                    //        break;
+                    //    }
+                    //}
+                    string[] linecontent = curLine.Split(',');
                     Reservation reservation = new Reservation()
                     {
 
