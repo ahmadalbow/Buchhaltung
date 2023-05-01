@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Buchhaltung.MVVM.Modell
 {
-    public class Ausgabe: ObservableObject
+    public class Ausgabe : ObservableObject
     {
 
         private string _Number;
@@ -26,6 +26,13 @@ namespace Buchhaltung.MVVM.Modell
                 OnPropertyChanged();
             }
         }
+        private bool _editMode;
+        [JsonIgnore]
+        public bool EditMode
+        {
+            get { return _editMode; }
+            set { _editMode = value; OnPropertyChanged(); }
+        }
 
 
         public double VorSteuer
@@ -39,11 +46,18 @@ namespace Buchhaltung.MVVM.Modell
         }
         public string art { get; set; }
         public string details { get; set; }
-       
+
         public DateTime Date { get; set; }
+
         public double Betrag { get; set; }
         [JsonIgnore]
         public RelayCommand RemoveAusgabe { get; set; }
+        [JsonIgnore]
+        public RelayCommand ConfirmEdit { get; set; }
+        [JsonIgnore]
+        public RelayCommand CancleEdit { get; set; }
+        [JsonIgnore]
+        public RelayCommand Edit { get; set; }
         public Ausgabe()
         {
             RemoveAusgabe = new RelayCommand(o =>
@@ -54,7 +68,11 @@ namespace Buchhaltung.MVVM.Modell
                     ausgabe.Number = (1 + MainViewModell.Ausgaben.IndexOf(ausgabe)) + "    " + art;
                 }
             });
-            details = "Ikea";
+            ConfirmEdit = new RelayCommand(o =>
+            {
+
+            });
+            details = "Möbil";
         }
 
     }

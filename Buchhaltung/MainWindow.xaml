@@ -40,8 +40,9 @@
                 <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment ="Right"
                         VerticalAlignment="Center">
-                    <Button  Margin="10"
+                    <Button  Margin="0 0 10 0"
                          Content="🞪" 
+                             Height="35"
                          Style="{StaticResource CloseButtonTheme}" Click="Button_Click"
                          >
                     </Button>

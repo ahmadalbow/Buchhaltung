@@ -4,24 +4,24 @@ using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Buchhaltung.MVVM.Modell
-{ 
+{
     class Reservation
     {
         public string Website { get; set; }
         public string Type { get; set; }
         public string ID { get; set; }
         public string City { get; set; }
-        public DateTime StartDate { get; set; }       
-        public DateTime EndDate { get; set;}
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string Listing { get; set; }
-        public string Guest  { get; set; }
+        public string Guest { get; set; }
         public double TotalAmount { get; set; }
         public double USt
         {
             get
             {
                 if (HostFee == 0) return 0;
-                return TotalAmount*7/100;
+                return TotalAmount * 7 / 100;
             }
         }
         public double VorSteuer
@@ -42,8 +42,8 @@ namespace Buchhaltung.MVVM.Modell
         {
             get
             {
-                
-                return TotalAmount - HostFee ;
+
+                return TotalAmount - HostFee;
             }
         }
         public double HostFee { get; set; }
@@ -56,7 +56,7 @@ namespace Buchhaltung.MVVM.Modell
                 if (Website == "Booking" && City == "Dresden") return TotalAmount * 6 / 100;
                 return 0; ;
             }
-            
+
         }
         public double PaymentFee { get; set; }
 
@@ -69,46 +69,49 @@ namespace Buchhaltung.MVVM.Modell
                 List<string> lines = new List<string>();
                 string ln;
                 int count = 0;
-                while((ln = streamReader.ReadLine()) != null)
+                while ((ln = streamReader.ReadLine()) != null)
                 {
                     try
                     {
-                        ln = ln.Replace("\"", "");
-                        
-                        float.Parse(ln[0].ToString() );
+                        if (ln[0] == '\"')
+                        {
+                            ln = ln.Replace("\"", "");
+                        }
+                        float.Parse(ln[0].ToString());
                         lines.Add(ln);
                         count++;
                     }
-                    catch {
-                        if (count ==0) continue;
-                        lines[count-1] = lines[count-1].Replace("\n", "") + ln; 
+                    catch
+                    {
+                        if (count == 0) continue;
+                        lines[count - 1] = lines[count - 1].Replace("\n", "") + ln;
                     }
-                    
+
                 }
-                for(int n = 0; n < lines.Count; n++)
+                for (int n = 0; n < lines.Count; n++)
                 {
                     string curLine = lines[n];
-                    //for (int i = 0; i < curLine.Length; i++)
-                    //{
-                    //    char c = curLine[i];
-                    //    if (c == '\"')
-                    //    {
-                    //        string textToBeRemoved = "";
-                    //        for (int j = i; j < curLine.Length; j++)
-                    //        {
-                    //            char cc = curLine[j];
-                    //            textToBeRemoved = textToBeRemoved + cc;
-                    //            if (cc == '\"' & j != i)
-                    //            {
-                    //                curLine = curLine.Replace(textToBeRemoved, "");
-                    //                break;
-                    //            }
+                    for (int i = 0; i < curLine.Length; i++)
+                    {
+                        char c = curLine[i];
+                        if (c == '\"')
+                        {
+                            string textToBeRemoved = "";
+                            for (int j = i; j < curLine.Length; j++)
+                            {
+                                char cc = curLine[j];
+                                textToBeRemoved = textToBeRemoved + cc;
+                                if (cc == '\"' & j != i)
+                                {
+                                    curLine = curLine.Replace(textToBeRemoved, "");
+                                    break;
+                                }
 
-                    //        }
-                    //        break;
-                    //    }
-                    //}
-                    string[] linecontent = curLine.Split(',');
+                            }
+                            break;
+                        }
+                    }
+                    string[] linecontent = curLine.Replace("\"", "").Split(',');
                     Reservation reservation = new Reservation()
                     {
 
@@ -121,7 +124,7 @@ namespace Buchhaltung.MVVM.Modell
                         HostFee = Double.Parse(linecontent[13]),
                         PaymentFee = Double.Parse(linecontent[14]),
                     };
-                    if (linecontent[15] == "Stayed")  reservation.Status = "confirmed";
+                    if (linecontent[15] == "Stayed") reservation.Status = "confirmed";
                     if (linecontent[15] == "Cancelled") reservation.Status = "cancelled";
                     reservations.Add(reservation);
                 }
@@ -141,10 +144,10 @@ namespace Buchhaltung.MVVM.Modell
                 }
                 for (int n = 1; n < lines.Count; n++)
                 {
-                    string curLine = lines[n];                  
+                    string curLine = lines[n];
                     string[] linecontent = curLine.Split(',');
 
-                    if (linecontent[2] == "" ) continue;
+                    if (linecontent[2] == "") continue;
                     Reservation reservation = new Reservation()
                     {
                         Website = "Airbnb",
@@ -154,13 +157,13 @@ namespace Buchhaltung.MVVM.Modell
                         Guest = linecontent[5],
                         PaymentFee = 0,
                     };
-                  reservation.Status = "confirmed";
+                    reservation.Status = "confirmed";
                     if (linecontent[12] == "")
                     {
                         reservation.HostFee = 0;
                         reservation.TotalAmount = Double.Parse(linecontent[10]);
                     }
-                    else 
+                    else
                     {
                         reservation.HostFee = Double.Parse(linecontent[12]);
                         reservation.TotalAmount = Double.Parse(linecontent[10]) + Double.Parse(linecontent[12]);

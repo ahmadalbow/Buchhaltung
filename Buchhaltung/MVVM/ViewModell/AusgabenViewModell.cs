@@ -16,7 +16,9 @@ namespace Buchhaltung.MVVM.ViewModell
         public string SelectedItem
         {
             get { return _selectedItem; }
-            set { _selectedItem = value;
+            set
+            {
+                _selectedItem = value;
                 OnPropertyChanged();
             }
         }
@@ -42,13 +44,13 @@ namespace Buchhaltung.MVVM.ViewModell
                 OnPropertyChanged();
             }
         }
-        private string  _details;
+        private string _details;
 
-        public string  Details
+        public string Details
         {
             get { return _details; }
-            set 
-            { 
+            set
+            {
                 _details = value;
                 OnPropertyChanged();
             }
@@ -67,7 +69,6 @@ namespace Buchhaltung.MVVM.ViewModell
                         Betrag = double.Parse(Betrag),
                         Date = DateTime.ParseExact(Date, "dd.MM.yyyy", null),
                         details = Details
-
                     };
                     MainViewModell.Ausgaben.Add(ausgabe);
                     Betrag = "";
@@ -77,8 +78,8 @@ namespace Buchhaltung.MVVM.ViewModell
 
                     MessageBox.Show("Wrong Date Syntax");
                 }
-               
-               
+
+
 
             });
         }
