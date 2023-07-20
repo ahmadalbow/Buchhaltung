@@ -21,7 +21,7 @@ namespace Buchhaltung.MVVM.Modell
             get
             {
                 if (HostFee == 0) return 0;
-                return TotalAmount * 7 / 100;
+                return TotalAmount * 7 / 107;
             }
         }
         public double VorSteuer
@@ -91,26 +91,7 @@ namespace Buchhaltung.MVVM.Modell
                 for (int n = 0; n < lines.Count; n++)
                 {
                     string curLine = lines[n];
-                    for (int i = 0; i < curLine.Length; i++)
-                    {
-                        char c = curLine[i];
-                        if (c == '\"')
-                        {
-                            string textToBeRemoved = "";
-                            for (int j = i; j < curLine.Length; j++)
-                            {
-                                char cc = curLine[j];
-                                textToBeRemoved = textToBeRemoved + cc;
-                                if (cc == '\"' & j != i)
-                                {
-                                    curLine = curLine.Replace(textToBeRemoved, "");
-                                    break;
-                                }
-
-                            }
-                            break;
-                        }
-                    }
+                   
                     string[] linecontent = curLine.Replace("\"", "").Split(',');
                     Reservation reservation = new Reservation()
                     {
