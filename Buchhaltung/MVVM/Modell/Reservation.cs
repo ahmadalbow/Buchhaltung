@@ -93,18 +93,30 @@ namespace Buchhaltung.MVVM.Modell
                     string curLine = lines[n];
                    
                     string[] linecontent = curLine.Replace("\"", "").Split(',');
+                    if (linecontent[15].ToLower() == "cancelled") continue;
+                    // Variablen erstellen
+                    string website = "Booking";
+                    string id = linecontent[0];
+                    DateTime startDate = DateTime.Parse(linecontent[3]);
+                    DateTime endDate = DateTime.Parse(linecontent[4]);
+                    string guest = linecontent[6];
+                    double totalAmount = Double.Parse(linecontent[12]);
+                    double hostFee = Double.Parse(linecontent[13]);
+                    double paymentFee = Double.Parse(linecontent[14]);
+
+                    // Objekt erstellen und Variablen zuweisen
                     Reservation reservation = new Reservation()
                     {
-
-                        Website = "Booking",
-                        ID = linecontent[0],
-                        StartDate = DateTime.Parse(linecontent[3]),
-                        EndDate = DateTime.Parse(linecontent[4]),
-                        Guest = linecontent[6],
-                        TotalAmount = Double.Parse(linecontent[12]),
-                        HostFee = Double.Parse(linecontent[13]),
-                        PaymentFee = Double.Parse(linecontent[14]),
+                        Website = website,
+                        ID = id,
+                        StartDate = startDate,
+                        EndDate = endDate,
+                        Guest = guest,
+                        TotalAmount = totalAmount,
+                        HostFee = hostFee,
+                        PaymentFee = paymentFee,
                     };
+
                     if (linecontent[15] == "Stayed") reservation.Status = "confirmed";
                     if (linecontent[15] == "Cancelled") reservation.Status = "cancelled";
                     reservations.Add(reservation);
@@ -129,16 +141,18 @@ namespace Buchhaltung.MVVM.Modell
                     string[] linecontent = curLine.Split(',');
 
                     if (linecontent[2] == "") continue;
-                    Reservation reservation = new Reservation()
-                    {
-                        Website = "Airbnb",
-                        Type = linecontent[1],
-                        ID = linecontent[2],
-                        StartDate = DateTime.Parse(linecontent[3]),
-                        Guest = linecontent[5],
-                        PaymentFee = 0,
-                    };
+                    // Create a reservation instance
+                    Reservation reservation = new Reservation();
+
+                    // Assign values to reservation properties
+                    reservation.Website = "Airbnb";
+                    reservation.Type = linecontent[1];
+                    reservation.ID = linecontent[2];
+                    reservation.StartDate = DateTime.Parse(linecontent[3]);
+                    reservation.Guest = linecontent[5];
+                    reservation.PaymentFee = 0;
                     reservation.Status = "confirmed";
+
                     if (linecontent[12] == "")
                     {
                         reservation.HostFee = 0;
