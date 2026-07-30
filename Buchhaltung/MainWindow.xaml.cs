@@ -21,6 +21,10 @@ namespace Buchhaltung
         public MainWindow()
         {
             InitializeComponent();
+
+            Rect workArea = SystemParameters.WorkArea;
+            Width = Math.Min(Width, Math.Max(0, workArea.Width - 20));
+            Height = Math.Min(Height, Math.Max(0, workArea.Height - 20));
         }
         public void Drag(object sender,MouseButtonEventArgs e)
         {

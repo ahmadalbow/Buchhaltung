@@ -9,6 +9,7 @@
         AllowsTransparency="True"
         Height="850" Width="1180"
         WindowStyle="None"
+        ResizeMode="CanResize"
         Title="Buchhaltung" 
         WindowStartupLocation="CenterScreen"
         Background="Transparent" Icon="/1802749.ico">
@@ -29,7 +30,7 @@
                 <RowDefinition  Height="40" />
                 <RowDefinition   />
                 <RowDefinition />
-                <RowDefinition Height="100" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid>
                 <Label FontWeight="SemiBold" 
@@ -48,82 +49,97 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <StackPanel VerticalAlignment="Stretch" Grid.Row="1" Orientation="Vertical"
-                    HorizontalAlignment="Center"
-                    
+            <Grid VerticalAlignment="Stretch" Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    Margin="20 0"
                     x:Name="canvas" >
-                <Label Margin="0 25 0 0"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Margin="0 10 0 0"
                    Content="Reservations Files" 
                    FontSize="20" FontWeight="Bold"
                    HorizontalAlignment="Center" />
-                <ListView Width="700"
-                          MinHeight="50" Height="{Binding 
-                       Converter={StaticResource PercentageConverter}, 
-                       ElementName=canvas, 
-                       Path=ActualHeight, 
-                       ConverterParameter=0.55}"
+                <ListView Grid.Row="1"
+                          MaxWidth="700"
+                          HorizontalAlignment="Stretch"
+                          MinHeight="20"
                           Background="Transparent"
                       BorderThickness="0" 
                       ItemsSource="{Binding paths}"
                       ItemContainerStyle="{StaticResource ReservationCard}"
-                      Margin="0 10">
+                      Margin="0 5">
                 </ListView>
-                <StackPanel  HorizontalAlignment="Center"  Orientation="Horizontal">
+                <StackPanel Grid.Row="2"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                     <Button  Background="#003B95"
                     Style="{StaticResource ButtonTheme}"
                     Content="Add  Booking"
                      Command="{Binding addFromBookingCommand}"
-                             Height="40">
+                             Height="40"
+                             Margin="10">
                     </Button>
                     <Button Background="#FF385C"
                     Style="{StaticResource ButtonTheme}"
                     Content="Add  Airbnb"
                         Command="{Binding addFromAirbnbCommand}"
-                            Height="40">
+                            Height="40"
+                            Margin="10">
                     </Button>
                     
                 </StackPanel>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Stretch" Grid.Row="2" Orientation="Vertical"
-                    HorizontalAlignment="Center"
-                    
+            </Grid>
+            <Grid VerticalAlignment="Stretch" Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    Margin="20 0"
                     x:Name="canvas1" >
-                <Label Margin="0 25 0 0"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Margin="0 10 0 0"
                    Content="Ausgaben" 
                    FontSize="20" FontWeight="Bold"
                    HorizontalAlignment="Center" />
-                <ListView Width="700"
-                          MinHeight="50" Height="{Binding 
-                       Converter={StaticResource PercentageConverter}, 
-                       ElementName=canvas, 
-                       Path=ActualHeight, 
-                       ConverterParameter=0.55}"
+                <ListView Grid.Row="1"
+                          MaxWidth="700"
+                          HorizontalAlignment="Stretch"
+                          MinHeight="20"
                           Background="Transparent"
                       BorderThickness="0" 
                       ItemsSource="{Binding Ausgaben}"
                       ItemContainerStyle="{StaticResource AusgabeCard}"
-                      Margin="0 10">
+                      Margin="0 5">
                 </ListView>
-                <StackPanel  HorizontalAlignment="Center"  Orientation="Horizontal">
+                <StackPanel Grid.Row="2"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
                     <Button Background="#555"  Height="40"
                     Style="{StaticResource ButtonTheme}"
                     Content="Add "
-                        Command="{Binding addAusgaben}" >
+                        Command="{Binding addAusgaben}"
+                        Margin="10">
                     </Button>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
 
-            <Grid Grid.Row="3" 
-                    HorizontalAlignment="Center"
+            <Grid Grid.Row="3"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Center">
 
-                <StackPanel Orientation="Horizontal">
-                    <Button Background="#555"  Height="40"
+                <WrapPanel HorizontalAlignment="Center">
+                    <Button Background="#555" Height="40" Margin="10"
                     Style="{StaticResource ButtonTheme}"
                     Content="Export .bow File "
                         Command="{Binding ExportFileCommand}" >
                     </Button>
-                    <Button Background="#555"  Height="40"
+                    <Button Background="#555" Height="40" Margin="10"
                     Style="{StaticResource ButtonTheme}"
                     Content="Import .bow File "
                         Command="{Binding ImportFileCommand}" >
@@ -132,9 +148,10 @@
                     Style="{StaticResource ButtonTheme}"
                     Content="Create Buchhaltung"
                     Command="{Binding CreateBuchHaltungCommand}"
-                        Height="40">
+                        Height="40"
+                        Margin="10">
                     </Button>
-                </StackPanel>
+                </WrapPanel>
             </Grid>
         </Grid>
     </Border>
