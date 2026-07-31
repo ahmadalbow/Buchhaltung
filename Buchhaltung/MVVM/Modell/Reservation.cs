@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 
@@ -100,9 +101,9 @@ namespace Buchhaltung.MVVM.Modell
                     DateTime startDate = DateTime.Parse(linecontent[3]);
                     DateTime endDate = DateTime.Parse(linecontent[4]);
                     string guest = linecontent[6];
-                    double totalAmount = Double.Parse(linecontent[12]);
-                    double hostFee = Double.Parse(linecontent[13]);
-                    double paymentFee = Double.Parse(linecontent[14]);
+                    double totalAmount = ParseCsvNumber(linecontent[12]);
+                    double hostFee = ParseCsvNumber(linecontent[13]);
+                    double paymentFee = ParseCsvNumber(linecontent[14]);
 
                     // Objekt erstellen und Variablen zuweisen
                     Reservation reservation = new Reservation()
@@ -156,17 +157,22 @@ namespace Buchhaltung.MVVM.Modell
                     if (linecontent[12] == "")
                     {
                         reservation.HostFee = 0;
-                        reservation.TotalAmount = Double.Parse(linecontent[10]);
+                        reservation.TotalAmount = ParseCsvNumber(linecontent[10]);
                     }
                     else
                     {
-                        reservation.HostFee = Double.Parse(linecontent[12]);
-                        reservation.TotalAmount = Double.Parse(linecontent[10]) + Double.Parse(linecontent[12]);
+                        reservation.HostFee = ParseCsvNumber(linecontent[12]);
+                        reservation.TotalAmount = ParseCsvNumber(linecontent[10]) + ParseCsvNumber(linecontent[12]);
                     }
                     reservations.Add(reservation);
                 }
             }
             return reservations;
+        }
+
+        private static double ParseCsvNumber(string value)
+        {
+            return double.Parse(value, NumberStyles.Float, CultureInfo.InvariantCulture);
         }
 
     }
